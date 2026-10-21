@@ -1,0 +1,108 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "An agenda task or milestone scheduled for a particular date and time slot",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "timeEnd": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "status": { "type": "string" },
+        "priority": { "type": "string" },
+        "orderIndex": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "date", "title", "status"]
+    },
+    "DiaryEntry": {
+      "title": "DiaryEntry",
+      "description": "A personal mindset reflection or diary entry with mood and gratitude highlights",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "mood": { "type": "string" },
+        "energy": { "type": "number" },
+        "tags": { "type": "string" },
+        "gratitudeNotes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "date", "content"]
+    },
+    "MorningPlan": {
+      "title": "MorningPlan",
+      "description": "15-minute morning planning routine containing non-negotiables, hydration, and vitality state",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "completedAt": { "type": "string" },
+        "affirmation": { "type": "string" },
+        "gratitude1": { "type": "string" },
+        "gratitude2": { "type": "string" },
+        "gratitude3": { "type": "string" },
+        "focusGoal1": { "type": "string" },
+        "focusGoal2": { "type": "string" },
+        "focusGoal3": { "type": "string" },
+        "mindsetScore": { "type": "number" },
+        "focusScore": { "type": "number" },
+        "energyLevel": { "type": "string" },
+        "waterGlasses": { "type": "number" },
+        "hydrationTarget": { "type": "number" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "date"]
+    },
+    "UserProgress": {
+      "title": "UserProgress",
+      "description": "Aggregated daily progress summary tracking tasks completion, hydration, and habits",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "completedTasks": { "type": "number" },
+        "totalTasks": { "type": "number" },
+        "waterGlasses": { "type": "number" },
+        "morningRoutineDone": { "type": "boolean" },
+        "completionRate": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User scheduled 24-hour agenda tasks"
+    },
+    "/users/{userId}/diary_entries/{entryId}": {
+      "schema": "DiaryEntry",
+      "description": "User mindset reflections and diary entries"
+    },
+    "/users/{userId}/morning_plans/{planId}": {
+      "schema": "MorningPlan",
+      "description": "User daily morning routines and non-negotiables"
+    },
+    "/users/{userId}/progress/{progressId}": {
+      "schema": "UserProgress",
+      "description": "User daily progress records and metrics stored in Firestore"
+    }
+  }
+}

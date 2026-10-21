@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidTask(data, userId) {
+      return data.userId == userId &&
+        data.id is string && data.id.size() > 0 &&
+        data.date is string && data.date.size() > 0 &&
+        data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+        data.status in ['pending', 'completed', 'deferred'];
+    }
+
+    function isValidDiaryEntry(data, userId) {
+      return data.userId == userId &&
+        data.id is string && data.id.size() > 0 &&
+        data.date is string && data.date.size() > 0 &&
+        data.content is string && data.content.size() > 0 && data.content.size() <= 10000;
+    }
+
+    function isValidMorningPlan(data, userId) {
+      return data.userId == userId &&
+        data.id is string && data.id.size() > 0 &&
+        data.date is string && data.date.size() > 0;
+    }
+
+    function isValidUserProgress(data, userId) {
+      return data.userId == userId &&
+        data.id is string && data.id.size() > 0 &&
+        data.date is string && data.date.size() > 0;
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      match /tasks/{taskId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidTask(request.resource.data, userId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /diary_entries/{entryId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidDiaryEntry(request.resource.data, userId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /morning_plans/{planId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidMorningPlan(request.resource.data, userId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /progress/{progressId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidUserProgress(request.resource.data, userId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /prayer_records/{recordId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Explicit deny for any undefined top-level path
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

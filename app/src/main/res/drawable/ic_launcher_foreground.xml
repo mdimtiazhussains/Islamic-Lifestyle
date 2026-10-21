@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Golden Sun in top right -->
+    <path
+        android:fillColor="#FBBC04"
+        android:pathData="M66,32a9,9 0 1,0 18,0a9,9 0 1,0 -18,0" />
+    <!-- Agenda / Diary Notebook base -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,32h30c3.31,0 6,2.69 6,6v40c0,3.31 -2.69,6 -6,6H32c-3.31,0 -6,-2.69 -6,-6V38c0,-3.31 2.69,-6 6,-6z" />
+    <!-- Notebook bookmark / spine accent -->
+    <path
+        android:fillColor="#34A853"
+        android:pathData="M26,38c0,-3.31 2.69,-6 6,-6v52c-3.31,0 -6,-2.69 -6,-6V38z" />
+    <!-- Notebook lines & checkmarks -->
+    <!-- Line 1: Checkmark + line -->
+    <path
+        android:fillColor="#4285F4"
+        android:pathData="M37,45l3,3l7,-7l1.5,1.5l-8.5,8.5l-4.5,-4.5z" />
+    <path
+        android:fillColor="#EA4335"
+        android:pathData="M52,48h10v2.5H52z" />
+    <!-- Line 2: Clock mini icon -->
+    <path
+        android:fillColor="#FBBC04"
+        android:pathData="M40,59a4,4 0 1,0 8,0a4,4 0 1,0 -8,0m4,-2v2.5l2,1"
+        android:strokeColor="#FBBC04"
+        android:strokeWidth="0.8" />
+    <path
+        android:fillColor="#5F6368"
+        android:pathData="M52,58h10v2.5H52z" />
+    <!-- Line 3: Diary text lines -->
+    <path
+        android:fillColor="#BDC1C6"
+        android:pathData="M38,68h24v2.5H38z" />
+    <path
+        android:fillColor="#BDC1C6"
+        android:pathData="M38,73h16v2.5H38z" />
+</vector>

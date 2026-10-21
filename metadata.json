@@ -1,0 +1,8 @@
+{
+  "name": "Imtiaz Lifestyle",
+  "description": "Dual Diary & 24-Hour Agenda with Morning Routine",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
